@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Institucional - Nuevo Usuario</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f172a; color: #f8fafc; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        .card { background-color: #1e293b; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); width: 100%; max-width: 420px; box-sizing: border-box; }
+        h2 { margin-top: 0; color: #38bdf8; text-align: center; }
+        .input-group { margin-bottom: 1.2rem; text-align: left; }
+        label { display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #94a3b8; }
+        input { width: 100%; padding: 0.7rem; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #fff; box-sizing: border-box; }
+        button { width: 100%; padding: 0.8rem; background-color: #0284c7; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        button:hover { background-color: #0369a1; }
+        .link-volver { display: block; text-align: center; margin-top: 1rem; color: #94a3b8; text-decoration: none; font-size: 0.85rem; }
+        .link-volver:hover { color: #38bdf8; }
+        #estado { margin-top: 1rem; font-size: 0.85rem; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Crear Cuenta</h2>
+        
+        <form id="registroForm">
+            <div class="input-group">
+                <label for="usuario">Nombre de Usuario</label>
+                <input type="text" id="usuario" placeholder="Ej. jperez" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Contrasena Segura</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" id="btnRegistro">Completar Registro</button>
+        </form>
+
+        <div id="estado"></div>
+        <a href="index.html" class="link-volver">Volver al Inicio de Sesion</a>
+    </div>
+
+    <script>
+        document.getElementById('registroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const u = document.getElementById('usuario');
+            const p = document.getElementById('password');
+            const est = document.getElementById('estado');
+
+            if (u.type === "password" || p.type === "text") {
+                est.style.color = "#f87171";
+                est.innerText = "Error: Configuracion de campos invertida en el DOM.";
+            } else {
+                est.style.color = "#34d399";
+                est.innerText = "Validacion estructural completada exitosamente.";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Institucional - Acceso Seguro</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f172a; color: #f8fafc; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        .login-card { background-color: #1e293b; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); width: 100%; max-width: 420px; text-align: center; box-sizing: border-box; }
+        h2 { margin-top: 0; margin-bottom: 1.5rem; color: #f8fafc; font-size: 1.3rem; }
+        .input-group { margin-bottom: 1.2rem; text-align: left; }
+        label { display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #94a3b8; }
+        input { width: 100%; padding: 0.7rem; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #fff; box-sizing: border-box; }
+        button { width: 100%; padding: 0.8rem; background-color: #0284c7; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        button:hover { background-color: #0369a1; }
+        #mensaje { margin-top: 1rem; font-size: 0.9rem; min-height: 1.2rem; }
+        .error { color: #f87171; }
+        .success-box { display: none; background-color: #064e3b; border: 1px solid #059669; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; }
+        .btn-descarga { display: inline-block; background-color: #10b981; color: white; text-decoration: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: bold; margin-top: 0.8rem; }
+        .timer-box { background: #092c1a; border: 1px solid #10b981; border-radius: 8px; padding: 12px; margin: 15px 0; }
+        .timer-title { font-size: 0.8rem; color: #a7f3d0; text-transform: uppercase; letter-spacing: 1px; }
+        .timer-display { font-size: 2rem; font-family: monospace; font-weight: bold; color: #34d399; margin: 5px 0; }
+        .timer-warning { font-size: 0.75rem; color: #f87171; font-weight: bold; line-height: 1.3; }
+        .link-secundario { display: block; margin-top: 15px; font-size: 0.85rem; color: #38bdf8; text-decoration: none; }
+        .link-secundario:hover { text-decoration: underline; }
+        
+        .bottom-container { width: 100%; max-width: 420px; margin-top: 1.5rem; }
+        .instructions-card { background-color: #1e293b; border-left: 4px solid #38bdf8; padding: 1.2rem 1.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); box-sizing: border-box; }
+        .instructions-card h4 { margin: 0 0 0.5rem 0; color: #38bdf8; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .instructions-card p { margin: 0 0 0.8rem 0; font-size: 0.85rem; color: #cbd5e1; line-height: 1.4; }
+        .instructions-card ol { margin: 0; padding-left: 1.2rem; font-size: 0.8rem; color: #94a3b8; line-height: 1.5; }
+        
+        .image-card-box { display: none; text-align: center; background-color: #1e293b; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); box-sizing: border-box; }
+        .badge-img { width: 220px; height: 220px; object-fit: cover; border-radius: 8px; border: 2px solid #10b981; }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2>Portal de Evaluacion</h2>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="usuario">Usuario del Sistema</label>
+                <input type="text" id="usuario" placeholder="Ingresa tu usuario" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Contrasena</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" id="btnIngresar">Iniciar Sesion</button>
+        </form>
+
+        <div id="mensaje"></div>
+
+        <div id="panelExito" class="success-box">
+            <h3 style="margin-top: 0;">Autenticacion Exitosa</h3>
+            
+            <div class="timer-box">
+                <div class="timer-title">Tiempo Restante de Sesion</div>
+                <div id="timerDisplay" class="timer-display">02:00:00</div>
+                <div class="timer-warning">
+                    cuando pase este tiempo TODO EL CODIGO SE ELIMINARA Y ABRAS PERDIDO EL EXAMEN que empiece el juego
+                </div>
+            </div>
+
+            <p style="font-size: 0.85rem; margin-bottom: 10px;">Acceso concedido a la documentacion y modulos del sistema.</p>
+            <a href="instrucciones_examen.docx" download class="btn-descarga">Descargar Hoja de Ruta del Examen</a>
+            
+            <!-- Solo visible tras iniciar sesión -->
+            <a href="registro.html" id="linkRegistro" class="link-secundario" style="margin-top: 15px; font-weight: bold;">
+                Proceder al Modulo de Registro de Usuarios &rarr;
+            </a>
+        </div>
+    </div>
+
+    <div class="bottom-container">
+        <div id="cardAviso" class="instructions-card">
+            <h4>Aviso de Ejecucion</h4>
+            <p>Si quieres que te vaya bien en el examen, hazlo funcionar con Live Server.</p>
+            <ol>
+                <li>Ejecuta el proyecto mediante el servidor local de tu editor (Live Server).</li>
+                <li>Inspecciona la consola de desarrollo (F12) y el codigo fuente ante anomalias.</li>
+                <li>No recargues con rutas directas (file://) para evitar bloqueos de origen y cache.</li>
+                <li>Inicia tu desarrollo creando la rama de trabajo segun las directrices del codigo fuente.</li>
+                <li>Manten tu terminal abierta en la raiz del proyecto para alternar versiones sin detener el servidor.</li>
+                <li>No intentes adivinar credenciales por arte de magia: el acceso depende de app.js. Si no sabes que hace ese archivo, este examen te lo recordara.</li>
+            </ol>
+        </div>
+
+        <div id="boxImagenAcceso" class="image-card-box">
+            <img src="imagen_acceso.jpg" alt="Acceso Autorizado" class="badge-img">
+            <div style="font-size: 0.85rem; color: #a7f3d0; margin-top: 10px; font-weight: bold;">
+                Sesion Activa: Auditoria en Progreso
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
